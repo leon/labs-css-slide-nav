@@ -1,0 +1,104 @@
+:root {
+  --animation-duration: 0.2s;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #353535;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  display: grid;
+  place-content: center;
+  min-height: 100%;
+}
+
+.nav {
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 1rem;
+
+  // setup scroll snapping
+  scroll-snap-type: x proximity;
+
+  // hide scrollbars
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav-item {
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 32px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+
+  /* animation for width */
+  width: 64px;
+  transition: width var(--animation-duration) linear;
+
+  .image {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border: 2px solid #fff;
+    background-color: limegreen;
+    border-radius: 32px;
+
+    /* animation for opacity */
+    opacity: 1;
+    transition: opacity var(--animation-duration) linear;
+  }
+
+  .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 64px;
+    padding: 0 1rem;
+    line-height: 64px;
+    color: #222;
+    background-color: #fff;
+    border-radius: 32px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  /* Active using hash */
+  &:target {
+    width: var(--width);
+    // scroll snap
+    scroll-snap-align: center;
+
+    .image {
+      opacity: 0;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+
+  button {
+    display: block;
+    border: 0;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
